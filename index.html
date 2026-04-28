@@ -3,9 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>കരിമ്പന്നൂർ കുടുംബയോഗം — 62-ാം വാർഷിക സമ്മേളനം</title>
+<title>കരിമ്പന്നൂർ മഹാകുടുംബയോഗം — 62-ാം വാർഷിക സമ്മേളനം</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@400;600;700&family=Noto+Sans+Malayalam:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js">
+function toggle(el) {
+  el.classList.toggle('open');
+  // hide hint after first open
+  const hint = el.querySelector('.expand-hint');
+  if (hint) hint.style.display = 'none';
+}
+</script>
 <style>
 :root {
   --bg:      #fdf8ef;
@@ -505,6 +512,36 @@ footer .f-tree{
   font-style: italic;
   font-weight: 400;
 }
+
+/* ── ACCORDION ── */
+.prog-item.expandable { cursor: pointer; }
+.prog-item.expandable .prog-title { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.expand-icon {
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: var(--forest); color: var(--amber);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; font-weight: 700;
+  transition: transform .25s, background .2s;
+  margin-left: auto;
+}
+.prog-item.expandable.open .expand-icon { transform: rotate(45deg); background: var(--gold); color: #fff; }
+.prog-expand-body {
+  display: none;
+  margin-top: .55rem;
+  padding-top: .55rem;
+  border-top: 1px dashed rgba(192,138,46,.3);
+  animation: fadeIn .2s ease;
+}
+.prog-item.expandable.open .prog-expand-body { display: block; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(-4px); } to { opacity:1; transform: translateY(0); } }
+.prog-item.expandable:hover { box-shadow: 0 4px 18px rgba(23,53,34,.12); }
+.expand-hint {
+  font-size: .75rem;
+  color: var(--sage);
+  margin-top: .2rem;
+  font-style: italic;
+}
 </style>
 </head>
 <body>
@@ -524,8 +561,14 @@ footer .f-tree{
 
   <div class="header-content">
     <div class="badge">✦ 62-ാം വർഷം ✦</div>
-    <h1 class="title-ml">കരിമ്പന്നൂർ<br>കുടുംബയോഗം</h1>
-    <p class="title-en">Karimpannoor Kudumbayogam · Since 1964</p>
+    <p style="font-family:'Noto Serif Malayalam',serif;font-size:.9rem;color:rgba(255,255,255,.6);letter-spacing:.5px;margin-bottom:.25rem;">മണർകാട് ശാഖ</p>
+    <h1 class="title-ml">കരിമ്പന്നൂർ<br>മഹാകുടുംബയോഗം</h1>
+    <div style="margin:.5rem 0 .25rem;display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;">
+      <span style="font-family:'Noto Serif Malayalam',serif;font-size:1rem;font-weight:700;color:var(--amber);background:rgba(212,170,90,.15);border:1px solid rgba(212,170,90,.4);padding:3px 14px;border-radius:20px;">കരിമ്പന്നൂർ</span>
+      <span style="color:rgba(255,255,255,.3);font-size:.9rem;">✦</span>
+      <span style="font-family:'Noto Serif Malayalam',serif;font-size:1rem;font-weight:700;color:var(--amber);background:rgba(212,170,90,.15);border:1px solid rgba(212,170,90,.4);padding:3px 14px;border-radius:20px;">ഈരേച്ചേരിൽ</span>
+    </div>
+    <p class="title-en">Karimpannoor Mahakudumbayogam · Since 1964</p>
 
     <div class="event-banner">
       <div class="banner-head">62-ാം വാർഷിക സമ്മേളനം</div>
@@ -674,16 +717,19 @@ footer .f-tree{
       </div>
     </div>
 
-    <div class="prog-item highlight">
+    <div class="prog-item highlight expandable" onclick="toggle(this)">
       <div class="prog-num">8</div>
       <div class="prog-body">
-        <div class="prog-title">ആശംസ പ്രസംഗം &amp; ആദരവ്</div>
+        <div class="prog-title">ആശംസ പ്രസംഗം &amp; ആദരവ് <span class="expand-icon">+</span></div>
         <div class="prog-name">ശ്രീ. E.C. തോമസ്, ഈരേച്ചേരിൽ</div>
-        <ul class="prog-bullets">
-          <li>ആശംസ പ്രസംഗം — ശ്രീ. E.C. തോമസ്, ഈരേച്ചേരിൽ</li>
-          <li>ആദരവ് — ജില്ലാ പഞ്ചായത്ത് മെമ്പറായി തിരഞ്ഞെടുക്കപ്പെട്ട സ്മത്. ഗ്രേസി കുര്യാക്കോസ്, കരിമ്പന്നൂർ</li>
-          <li>3 പ്രസിഡന്റുമാർ ചേർന്ന് മൊമെന്റോ നൽകി ആദരിക്കുന്നു</li>
-        </ul>
+        <div class="expand-hint">👆 കൂടുതൽ കാണാൻ ടാപ്പ് ചെയ്യൂ</div>
+        <div class="prog-expand-body">
+          <ul class="prog-bullets">
+            <li>ആശംസ പ്രസംഗം — ശ്രീ. E.C. തോമസ്, ഈരേച്ചേരിൽ</li>
+            <li>ആദരവ് — ജില്ലാ പഞ്ചായത്ത് മെമ്പറായി തിരഞ്ഞെടുക്കപ്പെട്ട സ്മത്. ഗ്രേസി കുര്യാക്കോസ്, കരിമ്പന്നൂർ</li>
+            <li>3 പ്രസിഡന്റുമാർ ചേർന്ന് മൊമെന്റോ നൽകി ആദരിക്കുന്നു</li>
+          </ul>
+        </div>
         <span class="prog-tag">Felicitation &amp; Honour</span>
       </div>
     </div>
@@ -706,27 +752,35 @@ footer .f-tree{
       </div>
     </div>
 
-    <div class="prog-item">
+    <div class="prog-item expandable" onclick="toggle(this)">
       <div class="prog-num">11</div>
       <div class="prog-body">
-        <div class="prog-title">ആശംസ പ്രസംഗങ്ങൾ</div>
-        <ul class="prog-bullets">
-          <li>റവ. ഫാ. എബ്രഹാം, കരിമ്പന്നൂർ</li>
-          <li>V.T. മാർക്കോസ്, തൃക്കോതമംഗലം ശാഖ</li>
-          <li>Dr. എബ്രഹാം വർഗ്ഗീസ്, തോട്ടപ്പുഴശ്ശേരി ശാഖ</li>
-        </ul>
+        <div class="prog-title">ആശംസ പ്രസംഗങ്ങൾ <span class="expand-icon">+</span></div>
+        <div class="prog-name">3 പ്രസംഗകർ</div>
+        <div class="expand-hint">👆 പ്രസംഗകരുടെ പേരുകൾ കാണാൻ ടാപ്പ് ചെയ്യൂ</div>
+        <div class="prog-expand-body">
+          <ul class="prog-bullets">
+            <li>റവ. ഫാ. എബ്രഹാം, കരിമ്പന്നൂർ</li>
+            <li>V.T. മാർക്കോസ്, തൃക്കോതമംഗലം ശാഖ</li>
+            <li>Dr. എബ്രഹാം വർഗ്ഗീസ്, തോട്ടപ്പുഴശ്ശേരി ശാഖ</li>
+          </ul>
+        </div>
         <span class="prog-tag">Felicitations</span>
       </div>
     </div>
 
-    <div class="prog-item highlight">
+    <div class="prog-item highlight expandable" onclick="toggle(this)">
       <div class="prog-num">12</div>
       <div class="prog-body">
-        <div class="prog-title">മെറിറ്റ് അവാർഡ്</div>
-        <ul class="prog-bullets">
-          <li><strong>അബിയ മറിയം ഷാജി</strong> — CBSE 10th<br><span class="bullet-note">Highest Mark Ever in the Family</span></li>
-          <li><strong>ജസ്റ്റിൻ കുരുവിള സുമോദ്</strong> — 12th<br><span class="bullet-note">Merit Award</span></li>
-        </ul>
+        <div class="prog-title">മെറിറ്റ് അവാർഡ് 🏆 <span class="expand-icon">+</span></div>
+        <div class="prog-name">2 വിദ്യാർഥികൾ</div>
+        <div class="expand-hint">👆 അവാർഡ് ജേതാക്കളെ കാണാൻ ടാപ്പ് ചെയ്യൂ</div>
+        <div class="prog-expand-body">
+          <ul class="prog-bullets">
+            <li><strong>അബിയ മറിയം ഷാജി</strong> — CBSE 10th<br><span class="bullet-note">Highest Mark Ever in the Family</span></li>
+            <li><strong>ജസ്റ്റിൻ കുരുവിള സുമോദ്</strong> — 12th<br><span class="bullet-note">Merit Award</span></li>
+          </ul>
+        </div>
         <span class="prog-tag">Merit Awards</span>
       </div>
     </div>
@@ -763,59 +817,15 @@ footer .f-tree{
   </div>
   <div class="sec-title">കുടുംബ ശാഖകൾ</div>
 
-  <!-- Tree root graphic -->
-  <div class="branch-tree">
-    <div class="branch-tree-title">ഒരൊറ്റ വേര്, അനേകം ശാഖകൾ — 1730 മുതൽ</div>
-    <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:200px;">
-      <!-- trunk -->
-      <path d="M155 195 Q158 170 160 140" stroke="#5c3318" stroke-width="8" fill="none" stroke-linecap="round"/>
-      <!-- main branches -->
-      <path d="M160 140 Q140 120 100 105" stroke="#5c3318" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M160 140 Q180 120 220 105" stroke="#5c3318" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M160 140 Q158 115 160 90" stroke="#5c3318" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <!-- sub branches left -->
-      <path d="M100 105 Q75 90 55 80" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M100 105 Q90 85 85 65" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M100 105 Q110 88 115 72" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <!-- sub branches right -->
-      <path d="M220 105 Q245 90 265 80" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M220 105 Q230 85 235 65" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M220 105 Q210 88 205 72" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <!-- sub branches center -->
-      <path d="M160 90 Q145 70 135 52" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M160 90 Q175 70 185 52" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M160 90 Q160 68 160 48" stroke="#3d7a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <!-- leaves / circles at tips -->
-      <circle cx="55" cy="75" r="10" fill="#3d7a52" opacity=".85"/>
-      <circle cx="85" cy="60" r="9" fill="#3d7a52" opacity=".85"/>
-      <circle cx="115" cy="66" r="9" fill="#255c38" opacity=".85"/>
-      <circle cx="135" cy="46" r="9" fill="#255c38" opacity=".85"/>
-      <circle cx="160" cy="42" r="10" fill="#173522" opacity=".9"/>
-      <circle cx="185" cy="46" r="9" fill="#255c38" opacity=".85"/>
-      <circle cx="205" cy="66" r="9" fill="#255c38" opacity=".85"/>
-      <circle cx="235" cy="60" r="9" fill="#3d7a52" opacity=".85"/>
-      <circle cx="265" cy="75" r="10" fill="#3d7a52" opacity=".85"/>
-      <!-- root lines -->
-      <path d="M155 195 Q130 198 105 195" stroke="#5c3318" stroke-width="3" fill="none" stroke-linecap="round" opacity=".5"/>
-      <path d="M165 195 Q190 198 215 195" stroke="#5c3318" stroke-width="3" fill="none" stroke-linecap="round" opacity=".5"/>
-      <path d="M150 195 Q125 202 100 205" stroke="#5c3318" stroke-width="2" fill="none" stroke-linecap="round" opacity=".3"/>
-      <path d="M170 195 Q195 202 220 205" stroke="#5c3318" stroke-width="2" fill="none" stroke-linecap="round" opacity=".3"/>
-      <!-- branch name labels -->
-      <text x="38" y="100" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">കരിമ്പന്നൂർ</text>
-      <text x="78" y="82" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">കൊല്ലാട്</text>
-      <text x="118" y="86" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">തൊടുപുഴ</text>
-      <text x="132" y="66" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">പടിക്കൽ</text>
-      <text x="160" y="34" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">മണർകാട്</text>
-      <text x="188" y="66" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">പുത്തൻ.</text>
-      <text x="208" y="86" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">വാഴക്കുള.</text>
-      <text x="238" y="82" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">മണിമലേ.</text>
-      <text x="272" y="100" font-size="7" fill="#173522" font-family="sans-serif" text-anchor="middle">എറണാകുളം</text>
-      <!-- root label -->
-      <text x="160" y="200" font-size="7.5" fill="#5c3318" font-family="sans-serif" text-anchor="middle" font-weight="bold">1730 · മണർകാട്</text>
-    </svg>
+  <!-- Family root banner -->
+  <div style="background:var(--forest);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;text-align:center;">
+    <div style="font-family:'Noto Serif Malayalam',serif;font-size:1rem;color:var(--amber);font-weight:700;margin-bottom:.6rem;">ഒരൊറ്റ വേര്, അനേകം ശാഖകൾ — 1730 മുതൽ</div>
+    <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.4rem .6rem;">
+      <span style="color:rgba(255,255,255,.35);font-size:.8rem;">🌳</span>
+      <span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">കരിമ്പന്നൂർ</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">കരിപ്പാപ്പുറത്ത്</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">പുത്തൻപുരയിൽ</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">മണിമലേത്ത്</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">വാഴക്കുളത്ത്</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">പടിക്കൽ</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">കൊല്ലാട്</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">തൊടുപുഴ</span><span style="font-family:Noto Serif Malayalam,serif;font-size:.82rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);padding:2px 10px;border-radius:12px;">എറണാകുളം</span>
+    </div>
   </div>
-
-  <div class="search-wrap">
+    <div class="search-wrap">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="6.5" cy="6.5" r="5" stroke="#888" stroke-width="1.5"/>
       <line x1="10.5" y1="10.5" x2="15" y2="15" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
@@ -873,7 +883,7 @@ footer .f-tree{
       <div class="h-year-badge">1964</div>
       <div class="h-card">
         <h4>കുടുംബയോഗം സ്ഥാപനം</h4>
-        <p>കരിമ്പന്നൂർ കുടുംബയോഗം ഔദ്യോഗികമായി 1964-ൽ സ്ഥാപിതമായി. കേരളത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ ചിതറിക്കിടക്കുന്ന കുടുംബ ശാഖകളെ ഒരുമിപ്പിക്കാനുള്ള ഉദ്ദേശ്യത്തോടെ ആരംഭിച്ചു.</p>
+        <p>കരിമ്പന്നൂർ മഹാകുടുംബയോഗം ഔദ്യോഗികമായി 1964-ൽ സ്ഥാപിതമായി. കേരളത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ ചിതറിക്കിടക്കുന്ന കുടുംബ ശാഖകളെ ഒരുമിപ്പിക്കാനുള്ള ഉദ്ദേശ്യത്തോടെ ആരംഭിച്ചു.</p>
       </div>
     </div>
     <div class="h-entry">
@@ -899,7 +909,7 @@ footer .f-tree{
 
 <footer>
   <span class="f-tree">🌳</span>
-  <div class="f-title">കരിമ്പന്നൂർ കുടുംബയോഗം</div>
+  <div class="f-title">കരിമ്പന്നൂർ മഹാകുടുംബയോഗം</div>
   62-ാം വാർഷിക സമ്മേളനം · മേയ് 1, 2026<br>
   St. Mary's Cathedral Hall, Manarcad, Kottayam<br>
   <span style="opacity:.3;font-size:.75rem;">1730 – 2026 · Since 1964</span>
@@ -974,6 +984,13 @@ new Chart(document.getElementById('branchChart'),{
     }
   }
 });
+
+function toggle(el) {
+  el.classList.toggle('open');
+  // hide hint after first open
+  const hint = el.querySelector('.expand-hint');
+  if (hint) hint.style.display = 'none';
+}
 </script>
 </body>
 </html>
