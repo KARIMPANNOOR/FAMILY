@@ -6,11 +6,21 @@
 <title>കരിമ്പന്നൂർ മഹാകുടുംബയോഗ വാർഷികം — 62-ാം വാർഷിക സമ്മേളനം</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@400;600;700&family=Noto+Sans+Malayalam:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js">
-function toggle(el) {
+function toggle(el, event) {
   el.classList.toggle('open');
-  // hide hint after first open
   const hint = el.querySelector('.expand-hint');
   if (hint) hint.style.display = 'none';
+  // ripple
+  const rip = document.createElement('span');
+  rip.classList.add('ripple-effect');
+  const rect = el.getBoundingClientRect();
+  const e = event || window.event;
+  const x = (e ? e.clientX - rect.left : rect.width/2) - 15;
+  const y = (e ? e.clientY - rect.top  : rect.height/2) - 15;
+  rip.style.left = x + 'px';
+  rip.style.top  = y + 'px';
+  el.appendChild(rip);
+  setTimeout(() => rip.remove(), 520);
 }
 </script>
 <style>
@@ -73,7 +83,10 @@ body{
   font-weight:700;
   line-height:1.2;
   margin-bottom:.3rem;
-  text-shadow:0 2px 16px rgba(0,0,0,.3);
+  text-shadow:0 0 40px rgba(212,170,90,.35), 0 2px 20px rgba(0,0,0,.4), 0 0 80px rgba(212,170,90,.15);
+  letter-spacing:.5px;
+  position:relative;
+  display:inline-block;
 }
 .title-en{
   font-family:'Libre Baskerville',serif;
@@ -607,26 +620,500 @@ footer .f-tree{
   margin-top: .6rem;
   font-style: italic;
 }
+
+.header-side-left{
+  position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:50px;height:200px;pointer-events:none;z-index:3;
+}
+.header-side-right{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:50px;height:200px;pointer-events:none;z-index:3;
+}
+.title-frame{
+  position:relative;display:inline-block;
+  padding:.5rem 1.5rem;
+  margin-bottom:.2rem;
+}
+.title-frame-top,.title-frame-bottom{
+  height:1px;
+  background:linear-gradient(to right,transparent,rgba(212,170,90,.7),transparent);
+  margin:0 1rem;
+}
+.title-frame-top{ margin-bottom:.4rem; }
+.title-frame-bottom{ margin-top:.4rem; }
+@keyframes goldPulse{
+  0%,100%{text-shadow:0 0 40px rgba(212,170,90,.35),0 2px 20px rgba(0,0,0,.4),0 0 80px rgba(212,170,90,.15);}
+  50%{text-shadow:0 0 60px rgba(212,170,90,.55),0 2px 20px rgba(0,0,0,.4),0 0 100px rgba(212,170,90,.3);}
+}
+.title-ml{ animation:goldPulse 3s ease-in-out infinite; }
+
+/* ── AMBIENT PARTICLES ── */
+#particles-canvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;opacity:.55;
+}
+
+/* ── SIDE VINE PANELS ── */
+.side-vine{
+  position:fixed;top:0;bottom:0;width:52px;
+  pointer-events:none;z-index:1;
+  display:flex;flex-direction:column;align-items:center;
+}
+.side-vine-left{ left:0; }
+.side-vine-right{ right:0; }
+.side-vine svg{ width:52px;height:100%; }
+
+/* make page content sit above everything */
+.nav,.page,footer,.masthead,.header,.tree-divider{ position:relative;z-index:2; }
+.nav{ z-index:100; }
+
+/* ── HEADER SHOOTING STARS ── */
+.star{
+  position:absolute;
+  width:2px;height:2px;
+  background:var(--amber);
+  border-radius:50%;
+  opacity:0;
+  animation:shoot 4s linear infinite;
+}
+@keyframes shoot{
+  0%{opacity:0;transform:translate(0,0) scale(1);}
+  10%{opacity:1;}
+  90%{opacity:.4;}
+  100%{opacity:0;transform:translate(180px,80px) scale(0);}
+}
+
+/* ── FLOATING LEAVES IN HEADER ── */
+.float-leaf{
+  position:absolute;
+  opacity:0;
+  animation:floatLeaf 7s ease-in-out infinite;
+  font-size:1rem;
+}
+@keyframes floatLeaf{
+  0%{opacity:0;transform:translateY(0) rotate(0deg);}
+  15%{opacity:.45;}
+  85%{opacity:.25;}
+  100%{opacity:0;transform:translateY(-120px) rotate(180deg);}
+}
+
+/* ── SHIMMER LINE UNDER TITLE ── */
+.shimmer-bar{
+  height:2px;width:70%;margin:.3rem auto .1rem;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(212,170,90,.2) 20%,
+    rgba(212,170,90,.9) 50%,
+    rgba(212,170,90,.2) 80%,
+    transparent 100%);
+  background-size:200% 100%;
+  animation:shimmerMove 2.5s ease-in-out infinite;
+  border-radius:2px;
+}
+@keyframes shimmerMove{
+  0%{background-position:200% 0;}
+  100%{background-position:-200% 0;}
+}
+
+/* ── CORNER FLOURISHES ── */
+.corner-flourish{
+  position:absolute;
+  width:70px;height:70px;
+  pointer-events:none;z-index:3;
+  opacity:.55;
+}
+.corner-flourish.tl{top:0;left:0;}
+.corner-flourish.tr{top:0;right:0;transform:scaleX(-1);}
+.corner-flourish.bl{bottom:0;left:0;transform:scaleY(-1);}
+.corner-flourish.br{bottom:0;right:0;transform:scale(-1,-1);}
+
+/* ── PAGE BG TEXTURE ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 10% 20%, rgba(61,122,82,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(192,138,46,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(23,53,34,.03) 0%, transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+/* Ensure cards stay sharp above bg */
+.prog-item,.b-card,.h-card,.family-tree-card,.cd-wrap,.venue-card{
+  position:relative;z-index:2;
+}
+
+/* ── SIDE VINE ANIMATION ── */
+.vine-dash{
+  stroke-dasharray:6 10;
+  animation:vineDash 4s linear infinite;
+}
+@keyframes vineDash{
+  to{stroke-dashoffset:-80;}
+}
+
+/* ══════════════════════════════════
+   CLICKABLE HIGHLIGHT SYSTEM
+══════════════════════════════════ */
+
+/* ── NAV links ── */
+.nav a {
+  position: relative;
+  overflow: hidden;
+}
+.nav a::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(212,170,90,.18) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity .25s;
+  pointer-events: none;
+}
+.nav a:hover::after { opacity: 1; }
+.nav a:hover {
+  color: var(--amber);
+  background: rgba(212,170,90,.08);
+}
+
+/* ── EXPANDABLE programme items ── */
+.prog-item.expandable {
+  border-left: 3px solid transparent;
+  transition: border-color .25s, box-shadow .25s, transform .15s, background .2s;
+  position: relative;
+}
+.prog-item.expandable::before {
+  content: '👆 tap to expand';
+  position: absolute;
+  top: 6px; right: 8px;
+  font-size: .62rem;
+  letter-spacing: .5px;
+  color: var(--sage);
+  opacity: .7;
+  font-family: sans-serif;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.prog-item.expandable.open::before { opacity: 0; }
+.prog-item.expandable:not(.open) {
+  background: linear-gradient(135deg, #fff 85%, rgba(192,138,46,.07) 100%);
+  border-left-color: rgba(192,138,46,.4);
+  box-shadow: 2px 0 0 rgba(192,138,46,.3), var(--sh);
+}
+.prog-item.expandable.highlight:not(.open) {
+  background: linear-gradient(135deg, var(--bg2) 80%, rgba(192,138,46,.12) 100%);
+}
+.prog-item.expandable:hover:not(.open) {
+  border-left-color: var(--gold);
+  box-shadow: 3px 0 0 var(--gold), 0 6px 24px rgba(23,53,34,.14);
+  transform: translateX(2px);
+  background: linear-gradient(135deg, #fff 75%, rgba(192,138,46,.12) 100%);
+}
+.prog-item.expandable.open {
+  border-left-color: var(--leaf);
+  box-shadow: 3px 0 0 var(--leaf), 0 6px 28px rgba(23,53,34,.12);
+}
+
+/* Pulsing glow on expand icon */
+.expand-icon {
+  animation: iconPulse 2.2s ease-in-out infinite;
+}
+.prog-item.expandable.open .expand-icon {
+  animation: none;
+}
+@keyframes iconPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(192,138,46,.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(192,138,46,.0); }
+}
+
+/* ── MAP LINK button ── */
+.map-link {
+  position: relative;
+  overflow: hidden;
+  transition: background .2s, transform .15s, box-shadow .2s;
+}
+.map-link::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.15) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform .4s;
+}
+.map-link:hover::before { transform: translateX(100%); }
+.map-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+}
+
+/* ── BRANCH CARDS ── */
+.b-card {
+  cursor: default;
+  border-top: 2px solid transparent;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+  position: relative;
+  overflow: hidden;
+}
+.b-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--leaf), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.b-card:hover::after { transform: scaleX(1); }
+.b-card:hover {
+  border-top-color: var(--sage);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(23,53,34,.14);
+}
+
+/* ── HISTORY ENTRIES ── */
+.h-entry {
+  transition: transform .2s;
+}
+.h-entry:hover { transform: translateX(4px); }
+.h-card {
+  transition: box-shadow .2s, border-color .2s;
+}
+.h-entry:hover .h-card {
+  box-shadow: 0 4px 20px rgba(23,53,34,.12);
+  border-color: rgba(192,138,46,.25);
+}
+
+/* ── VENUE card hover ── */
+.venue-card {
+  transition: box-shadow .2s;
+}
+.venue-card:hover {
+  box-shadow: 0 6px 30px rgba(23,53,34,.2);
+}
+
+/* ── CLICK RIPPLE on expandable ── */
+@keyframes ripple {
+  to { transform: scale(3.5); opacity: 0; }
+}
+.ripple-effect {
+  position: absolute;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(192,138,46,.25);
+  transform: scale(0);
+  animation: ripple .5s linear;
+  pointer-events: none;
+}
 </style>
 </head>
 <body>
 
+<!-- Ambient canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Left vine panel -->
+<div class="side-vine side-vine-left">
+  <svg viewBox="0 0 52 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="vineGradL" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3d7a52" stop-opacity=".0"/>
+        <stop offset="15%" stop-color="#3d7a52" stop-opacity=".5"/>
+        <stop offset="85%" stop-color="#3d7a52" stop-opacity=".5"/>
+        <stop offset="100%" stop-color="#3d7a52" stop-opacity=".0"/>
+      </linearGradient>
+    </defs>
+    <!-- main vine stem -->
+    <path d="M26 0 Q22 80 26 160 Q30 240 24 320 Q18 400 26 480 Q34 560 26 640 Q20 720 26 800"
+      stroke="url(#vineGradL)" stroke-width="1.5" fill="none" class="vine-dash"/>
+    <!-- left leaflets -->
+    <path d="M26 80  Q8  72  4  60"  stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 160 Q8  150 3  138" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 260 Q8  250 3  238" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 360 Q8  350 3  338" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 460 Q8  450 3  438" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 560 Q8  550 3  538" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <!-- right leaflets -->
+    <path d="M26 120 Q44 112 48 100" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 220 Q44 212 48 200" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 320 Q44 312 48 300" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 420 Q44 412 48 400" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 520 Q44 512 48 500" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <!-- leaf dots -->
+    <circle cx="4"  cy="58"  r="4" fill="rgba(61,122,82,.45)"/>
+    <circle cx="3"  cy="136" r="3.5" fill="rgba(61,122,82,.4)"/>
+    <circle cx="3"  cy="236" r="4" fill="rgba(61,122,82,.45)"/>
+    <circle cx="3"  cy="336" r="3.5" fill="rgba(61,122,82,.4)"/>
+    <circle cx="3"  cy="436" r="4" fill="rgba(61,122,82,.45)"/>
+    <circle cx="3"  cy="536" r="3.5" fill="rgba(61,122,82,.4)"/>
+    <circle cx="48" cy="98"  r="3.5" fill="rgba(192,138,46,.4)"/>
+    <circle cx="48" cy="198" r="3"   fill="rgba(192,138,46,.35)"/>
+    <circle cx="48" cy="298" r="3.5" fill="rgba(192,138,46,.4)"/>
+    <circle cx="48" cy="398" r="3"   fill="rgba(192,138,46,.35)"/>
+    <circle cx="48" cy="498" r="3.5" fill="rgba(192,138,46,.4)"/>
+    <!-- gold dots on main vine -->
+    <circle cx="26" cy="160" r="3" fill="rgba(192,138,46,.5)"/>
+    <circle cx="26" cy="320" r="3" fill="rgba(192,138,46,.5)"/>
+    <circle cx="26" cy="480" r="3" fill="rgba(192,138,46,.5)"/>
+    <circle cx="26" cy="640" r="3" fill="rgba(192,138,46,.5)"/>
+  </svg>
+</div>
+
+<!-- Right vine panel (mirror) -->
+<div class="side-vine side-vine-right">
+  <svg viewBox="0 0 52 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="vineGradR" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3d7a52" stop-opacity=".0"/>
+        <stop offset="15%" stop-color="#3d7a52" stop-opacity=".5"/>
+        <stop offset="85%" stop-color="#3d7a52" stop-opacity=".5"/>
+        <stop offset="100%" stop-color="#3d7a52" stop-opacity=".0"/>
+      </linearGradient>
+    </defs>
+    <path d="M26 0 Q30 80 26 160 Q22 240 28 320 Q34 400 26 480 Q18 560 26 640 Q32 720 26 800"
+      stroke="url(#vineGradR)" stroke-width="1.5" fill="none" class="vine-dash"/>
+    <path d="M26 80  Q44 72  48 60"  stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 160 Q44 150 49 138" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 260 Q44 250 49 238" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 360 Q44 350 49 338" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 460 Q44 450 49 438" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 560 Q44 550 49 538" stroke="rgba(61,122,82,.4)" stroke-width="1.2" fill="none"/>
+    <path d="M26 120 Q8  112 4  100" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 220 Q8  212 4  200" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 320 Q8  312 4  300" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 420 Q8  412 4  400" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <path d="M26 520 Q8  512 4  500" stroke="rgba(192,138,46,.3)" stroke-width="1.2" fill="none"/>
+    <circle cx="48" cy="58"  r="4" fill="rgba(61,122,82,.45)"/>
+    <circle cx="49" cy="136" r="3.5" fill="rgba(61,122,82,.4)"/>
+    <circle cx="49" cy="236" r="4" fill="rgba(61,122,82,.45)"/>
+    <circle cx="49" cy="336" r="3.5" fill="rgba(61,122,82,.4)"/>
+    <circle cx="49" cy="436" r="4" fill="rgba(61,122,82,.45)"/>
+    <circle cx="49" cy="536" r="3.5" fill="rgba(61,122,82,.4)"/>
+    <circle cx="4"  cy="98"  r="3.5" fill="rgba(192,138,46,.4)"/>
+    <circle cx="4"  cy="198" r="3"   fill="rgba(192,138,46,.35)"/>
+    <circle cx="4"  cy="298" r="3.5" fill="rgba(192,138,46,.4)"/>
+    <circle cx="4"  cy="398" r="3"   fill="rgba(192,138,46,.35)"/>
+    <circle cx="4"  cy="498" r="3.5" fill="rgba(192,138,46,.4)"/>
+    <circle cx="26" cy="160" r="3" fill="rgba(192,138,46,.5)"/>
+    <circle cx="26" cy="320" r="3" fill="rgba(192,138,46,.5)"/>
+    <circle cx="26" cy="480" r="3" fill="rgba(192,138,46,.5)"/>
+    <circle cx="26" cy="640" r="3" fill="rgba(192,138,46,.5)"/>
+  </svg>
+</div>
+
+
 <!-- ══ HEADER ══ -->
 <div class="header">
+
+    <!-- corner flourishes -->
+    <svg class="corner-flourish tl" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 Q2 2 68 2" stroke="rgba(212,170,90,.5)" stroke-width="1" fill="none"/>
+      <path d="M2 48 Q2 2 48 2" stroke="rgba(212,170,90,.3)" stroke-width=".7" fill="none"/>
+      <circle cx="2" cy="2" r="3" fill="rgba(212,170,90,.6)"/>
+      <path d="M2 30 Q15 22 20 10" stroke="rgba(61,122,82,.5)" stroke-width="1" fill="none"/>
+      <circle cx="20" cy="9" r="4" fill="rgba(61,122,82,.5)"/>
+      <path d="M2 50 Q8 44 5 35" stroke="rgba(61,122,82,.4)" stroke-width="1" fill="none"/>
+    </svg>
+    <svg class="corner-flourish tr" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 Q2 2 68 2" stroke="rgba(212,170,90,.5)" stroke-width="1" fill="none"/>
+      <path d="M2 48 Q2 2 48 2" stroke="rgba(212,170,90,.3)" stroke-width=".7" fill="none"/>
+      <circle cx="2" cy="2" r="3" fill="rgba(212,170,90,.6)"/>
+      <path d="M2 30 Q15 22 20 10" stroke="rgba(61,122,82,.5)" stroke-width="1" fill="none"/>
+      <circle cx="20" cy="9" r="4" fill="rgba(61,122,82,.5)"/>
+    </svg>
+    <svg class="corner-flourish bl" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 Q2 2 68 2" stroke="rgba(212,170,90,.5)" stroke-width="1" fill="none"/>
+      <circle cx="2" cy="2" r="3" fill="rgba(212,170,90,.6)"/>
+    </svg>
+    <svg class="corner-flourish br" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 Q2 2 68 2" stroke="rgba(212,170,90,.5)" stroke-width="1" fill="none"/>
+      <circle cx="2" cy="2" r="3" fill="rgba(212,170,90,.6)"/>
+    </svg>
   <!-- Decorative background leaves -->
+  <!-- Background decorative SVG -->
   <svg class="header-leaves" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 280 Q60 200 40 120 Q80 160 100 80 Q110 160 150 140 Q130 200 160 280Z" fill="white"/>
-    <path d="M320 290 Q360 210 340 130 Q380 170 400 90 Q410 170 440 150 Q420 210 450 290Z" fill="white"/>
-    <path d="M150 10 Q170 50 200 40 Q190 70 220 80 Q200 90 195 130 Q175 100 150 110 Q155 70 130 50Z" fill="white"/>
-    <path d="M-10 60 Q20 100 50 85 Q35 115 55 130 Q30 135 20 170 Q5 145 -20 150 Q-10 115 -30 95Z" fill="white"/>
-    <circle cx="370" cy="60" r="25" fill="white" opacity=".5"/>
-    <circle cx="30" cy="250" r="15" fill="white" opacity=".4"/>
-    <circle cx="380" cy="240" r="18" fill="white" opacity=".3"/>
+    <!-- Left side tree branch -->
+    <path d="M0 300 Q20 260 15 220 Q35 250 30 180 Q50 210 45 150 Q65 170 55 110" stroke="white" stroke-width="2" fill="none" opacity=".6"/>
+    <path d="M15 220 Q-10 205 -20 185" stroke="white" stroke-width="1.5" fill="none" opacity=".5"/>
+    <path d="M30 180 Q5 165 -5 145" stroke="white" stroke-width="1.5" fill="none" opacity=".5"/>
+    <path d="M45 150 Q20 135 10 115" stroke="white" stroke-width="1.5" fill="none" opacity=".5"/>
+    <circle cx="-20" cy="183" r="12" fill="white" opacity=".25"/>
+    <circle cx="-5" cy="143" r="10" fill="white" opacity=".2"/>
+    <circle cx="10" cy="113" r="9" fill="white" opacity=".2"/>
+    <circle cx="55" cy="108" r="14" fill="white" opacity=".25"/>
+    <circle cx="48" cy="96" r="9" fill="white" opacity=".18"/>
+    <!-- Right side tree branch -->
+    <path d="M400 300 Q380 260 385 220 Q365 250 370 180 Q350 210 355 150 Q335 170 345 110" stroke="white" stroke-width="2" fill="none" opacity=".6"/>
+    <path d="M385 220 Q410 205 420 185" stroke="white" stroke-width="1.5" fill="none" opacity=".5"/>
+    <path d="M370 180 Q395 165 405 145" stroke="white" stroke-width="1.5" fill="none" opacity=".5"/>
+    <path d="M355 150 Q380 135 390 115" stroke="white" stroke-width="1.5" fill="none" opacity=".5"/>
+    <circle cx="420" cy="183" r="12" fill="white" opacity=".25"/>
+    <circle cx="405" cy="143" r="10" fill="white" opacity=".2"/>
+    <circle cx="390" cy="113" r="9" fill="white" opacity=".2"/>
+    <circle cx="345" cy="108" r="14" fill="white" opacity=".25"/>
+    <circle cx="352" cy="96" r="9" fill="white" opacity=".18"/>
+    <!-- Top center subtle glow circles -->
+    <circle cx="200" cy="30" r="60" fill="rgba(212,170,90,0.06)"/>
+    <circle cx="200" cy="30" r="35" fill="rgba(212,170,90,0.05)"/>
+    <!-- Scattered dots -->
+    <circle cx="80" cy="40" r="3" fill="white" opacity=".2"/>
+    <circle cx="320" cy="40" r="3" fill="white" opacity=".2"/>
+    <circle cx="60" cy="80" r="2" fill="white" opacity=".15"/>
+    <circle cx="340" cy="80" r="2" fill="white" opacity=".15"/>
+    <circle cx="100" cy="20" r="2" fill="white" opacity=".12"/>
+    <circle cx="300" cy="20" r="2" fill="white" opacity=".12"/>
+  </svg>
+
+  <!-- Left decorative panel (absolutely positioned) -->
+  <svg class="header-side-left" viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+    <line x1="30" y1="10" x2="30" y2="190" stroke="rgba(212,170,90,.3)" stroke-width="1"/>
+    <circle cx="30" cy="10"  r="3" fill="rgba(212,170,90,.5)"/>
+    <circle cx="30" cy="50"  r="2" fill="rgba(212,170,90,.4)"/>
+    <circle cx="30" cy="100" r="4" fill="rgba(212,170,90,.6)"/>
+    <circle cx="30" cy="150" r="2" fill="rgba(212,170,90,.4)"/>
+    <circle cx="30" cy="190" r="3" fill="rgba(212,170,90,.5)"/>
+    <path d="M30 100 Q15 88 8 76" stroke="rgba(212,170,90,.35)" stroke-width="1.2" fill="none"/>
+    <path d="M30 100 Q45 88 52 76" stroke="rgba(212,170,90,.35)" stroke-width="1.2" fill="none"/>
+    <circle cx="8"  cy="74" r="5" fill="rgba(61,122,82,.6)"/>
+    <circle cx="52" cy="74" r="5" fill="rgba(61,122,82,.6)"/>
+    <path d="M30 50 Q18 42 12 35" stroke="rgba(212,170,90,.25)" stroke-width="1" fill="none"/>
+    <circle cx="11" cy="33" r="4" fill="rgba(61,122,82,.45)"/>
+    <path d="M30 150 Q18 158 12 165" stroke="rgba(212,170,90,.25)" stroke-width="1" fill="none"/>
+    <circle cx="11" cy="167" r="4" fill="rgba(61,122,82,.45)"/>
+  </svg>
+  <!-- Right decorative panel -->
+  <svg class="header-side-right" viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+    <line x1="30" y1="10" x2="30" y2="190" stroke="rgba(212,170,90,.3)" stroke-width="1"/>
+    <circle cx="30" cy="10"  r="3" fill="rgba(212,170,90,.5)"/>
+    <circle cx="30" cy="50"  r="2" fill="rgba(212,170,90,.4)"/>
+    <circle cx="30" cy="100" r="4" fill="rgba(212,170,90,.6)"/>
+    <circle cx="30" cy="150" r="2" fill="rgba(212,170,90,.4)"/>
+    <circle cx="30" cy="190" r="3" fill="rgba(212,170,90,.5)"/>
+    <path d="M30 100 Q15 88 8 76" stroke="rgba(212,170,90,.35)" stroke-width="1.2" fill="none"/>
+    <path d="M30 100 Q45 88 52 76" stroke="rgba(212,170,90,.35)" stroke-width="1.2" fill="none"/>
+    <circle cx="8"  cy="74" r="5" fill="rgba(61,122,82,.6)"/>
+    <circle cx="52" cy="74" r="5" fill="rgba(61,122,82,.6)"/>
+    <path d="M30 50 Q18 42 12 35" stroke="rgba(212,170,90,.25)" stroke-width="1" fill="none"/>
+    <circle cx="11" cy="33" r="4" fill="rgba(61,122,82,.45)"/>
+    <path d="M30 150 Q18 158 12 165" stroke="rgba(212,170,90,.25)" stroke-width="1" fill="none"/>
+    <circle cx="11" cy="167" r="4" fill="rgba(61,122,82,.45)"/>
   </svg>
 
   <div class="header-content">
+    <!-- shooting stars -->
+    <div class="star" style="top:20%;left:5%;animation-delay:0s;animation-duration:3.5s;"></div>
+    <div class="star" style="top:40%;left:15%;animation-delay:1.2s;animation-duration:4s;"></div>
+    <div class="star" style="top:10%;left:60%;animation-delay:2.1s;animation-duration:3.2s;"></div>
+    <div class="star" style="top:60%;left:75%;animation-delay:.7s;animation-duration:4.5s;"></div>
+    <div class="star" style="top:30%;left:85%;animation-delay:1.8s;animation-duration:3.8s;"></div>
+    <!-- floating leaves -->
+    <div class="float-leaf" style="bottom:10%;left:8%;animation-delay:0s;animation-duration:6s;">🌿</div>
+    <div class="float-leaf" style="bottom:5%;left:22%;animation-delay:2s;animation-duration:7.5s;">🍃</div>
+    <div class="float-leaf" style="bottom:15%;right:10%;animation-delay:1s;animation-duration:6.5s;">🌿</div>
+    <div class="float-leaf" style="bottom:8%;right:25%;animation-delay:3s;animation-duration:8s;">🍃</div>
     <div class="badge">✦ 62-ാം വർഷം ✦</div>
-    <h1 class="title-ml">കരിമ്പന്നൂർ<br>മഹാകുടുംബയോഗ വാർഷികം</h1>
+    <div class="title-frame">
+      <div class="title-frame-top"></div>
+      <h1 class="title-ml">കരിമ്പന്നൂർ<br>മഹാകുടുംബയോഗ വാർഷികം</h1>
+      <div class="title-frame-bottom"></div>
+    </div>
+    <div class="shimmer-bar"></div>
     <p style="font-family:'Noto Serif Malayalam',serif;font-size:.9rem;color:rgba(255,255,255,.85);letter-spacing:.5px;margin:.3rem 0 .3rem;">മണർകാട് ശാഖ</p>
     <div style="margin:.2rem 0 .3rem;display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;">
       <span style="font-family:'Noto Serif Malayalam',serif;font-size:1rem;font-weight:700;color:var(--amber);background:rgba(212,170,90,.15);border:1px solid rgba(212,170,90,.4);padding:3px 14px;border-radius:20px;">കരിമ്പന്നൂർ</span>
@@ -774,7 +1261,7 @@ footer .f-tree{
       </div>
     </div>
 
-    <div class="prog-item highlight expandable" onclick="toggle(this)">
+    <div class="prog-item highlight expandable" onclick="toggle(this, event)">
       <div class="prog-num">7</div>
       <div class="prog-body">
         <div class="prog-title">ഉദ്ഘാടനം <span class="expand-icon">+</span></div>
@@ -791,7 +1278,7 @@ footer .f-tree{
       </div>
     </div>
 
-    <div class="prog-item highlight expandable" onclick="toggle(this)">
+    <div class="prog-item highlight expandable" onclick="toggle(this, event)">
       <div class="prog-num">8</div>
       <div class="prog-body">
         <div class="prog-title">ആദരിക്കൽ: ശ്രീമതി ഗ്രേസി കരിമ്പന്നൂർ <span class="expand-icon">+</span></div>
@@ -827,7 +1314,7 @@ footer .f-tree{
       </div>
     </div>
 
-    <div class="prog-item expandable" onclick="toggle(this)">
+    <div class="prog-item expandable" onclick="toggle(this, event)">
       <div class="prog-num">11</div>
       <div class="prog-body">
         <div class="prog-title">ആശംസ പ്രസംഗങ്ങൾ <span class="expand-icon">+</span></div>
@@ -844,7 +1331,7 @@ footer .f-tree{
       </div>
     </div>
 
-    <div class="prog-item highlight expandable" onclick="toggle(this)">
+    <div class="prog-item highlight expandable" onclick="toggle(this, event)">
       <div class="prog-num">12</div>
       <div class="prog-body">
         <div class="prog-title">മെറിറ്റ് അവാർഡ് 🏆 <span class="expand-icon">+</span></div>
@@ -1122,12 +1609,65 @@ function filterBranches(){
   ));
 }
 
-function toggle(el) {
+function toggle(el, event) {
   el.classList.toggle('open');
-  // hide hint after first open
   const hint = el.querySelector('.expand-hint');
   if (hint) hint.style.display = 'none';
+  // ripple
+  const rip = document.createElement('span');
+  rip.classList.add('ripple-effect');
+  const rect = el.getBoundingClientRect();
+  const e = event || window.event;
+  const x = (e ? e.clientX - rect.left : rect.width/2) - 15;
+  const y = (e ? e.clientY - rect.top  : rect.height/2) - 15;
+  rip.style.left = x + 'px';
+  rip.style.top  = y + 'px';
+  el.appendChild(rip);
+  setTimeout(() => rip.remove(), 520);
 }
+</script>
+
+<script>
+(function(){
+  const cv = document.getElementById('particles-canvas');
+  if(!cv) return;
+  const ctx = cv.getContext('2d');
+  let W, H, pts=[];
+  function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const colors=['rgba(61,122,82,','rgba(192,138,46,','rgba(212,170,90,','rgba(37,92,56,'];
+  for(let i=0;i<38;i++){
+    pts.push({
+      x:Math.random()*window.innerWidth,
+      y:Math.random()*window.innerHeight,
+      r:Math.random()*2.2+.6,
+      dx:(Math.random()-.5)*.3,
+      dy:(Math.random()-.5)*.25,
+      c:colors[Math.floor(Math.random()*colors.length)],
+      a:Math.random()*.18+.04,
+      pulse:Math.random()*Math.PI*2,
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const t=Date.now()/1000;
+    pts.forEach(p=>{
+      p.pulse+=.012;
+      const alpha=p.a+Math.sin(p.pulse)*.06;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.c+alpha+')';
+      ctx.fill();
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<-5) p.x=W+5;
+      if(p.x>W+5) p.x=-5;
+      if(p.y<-5) p.y=H+5;
+      if(p.y>H+5) p.y=-5;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 </body>
 </html>
