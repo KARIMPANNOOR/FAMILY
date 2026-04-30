@@ -1347,7 +1347,7 @@ body::before{
       <div class="title-frame-bottom"></div>
     </div>
     <div class="shimmer-bar"></div>
-    <p style="font-family:'Noto Serif Malayalam',serif;font-size:.9rem;color:rgba(255,255,255,.85);letter-spacing:.5px;margin:.3rem 0 .3rem;">മണർകാട് ശാഖ</p>
+    <p style="font-family:'Noto Serif Malayalam',serif;font-size:.9rem;color:rgba(255,255,255,.85);letter-spacing:.5px;margin:.3rem 0 .3rem;">മണർകാട് മേഖല</p>
     <div style="margin:.2rem 0 .3rem;display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;">
       <span style="font-family:'Noto Serif Malayalam',serif;font-size:1rem;font-weight:700;color:var(--amber);background:rgba(212,170,90,.15);border:1px solid rgba(212,170,90,.4);padding:3px 14px;border-radius:20px;">കരിമ്പന്നൂർ</span>
       <span style="color:rgba(255,255,255,.3);font-size:.9rem;">✦</span>
@@ -1427,7 +1427,7 @@ body::before{
 <nav class="nav">
   <a href="#home"      onclick="setActive(this)">ആമുഖം</a>
   <a href="#schedule"  onclick="setActive(this)">📋 പരിപാടി</a>
-  <a href="#branches"  onclick="setActive(this)">🌿 ശാഖകൾ</a>
+  <a href="#branches"  onclick="setActive(this)">🌿 മേഖലകൾ</a>
   <a href="#chart" onclick="setActive(this)">📅 ചരിത്രം</a>
   <a href="#history"   onclick="setActive(this)">📜 ചരിത്രം</a>
 </nav>
@@ -1511,7 +1511,7 @@ body::before{
       <div class="prog-num">4</div>
       <div class="prog-body">
         <div class="prog-title">ഉദ്ഘാടനം <span class="expand-icon">+</span></div>
-        <div class="prog-name">3 ശാഖകളുടെ Presidents</div>
+        <div class="prog-name">3 മേഖലകളുടെ Presidents</div>
         <div class="expand-hint">👆 വിവരങ്ങൾ കാണാൻ ടാപ്പ് ചെയ്യൂ</div>
         <div class="prog-expand-body">
           <ul class="prog-bullets">
@@ -1611,8 +1611,25 @@ body::before{
       </div>
     </div>
 
-    <div class="prog-item highlight">
+    <div class="prog-item highlight expandable" onclick="toggle(this, event)">
       <div class="prog-num">11</div>
+      <div class="prog-body">
+        <div class="prog-title">🏅 India Book of Records <span class="expand-icon">+</span></div>
+        <div class="prog-name">Ethan Abraham Basanth</div>
+        <div class="expand-hint">👆 കൂടുതൽ കാണാൻ ടാപ്പ് ചെയ്യൂ</div>
+        <div class="prog-expand-body">
+          <ul class="prog-bullets">
+            <li>India Book of Records (IBR) Achiever — Country Flag Identification: ഒരു Flag കണ്ടാൽ ഏത് രാജ്യത്തിന്റേതാണെന്ന് തിരിച്ചറിയുന്ന അസാധാരണ കഴിവ്</li>
+            <li>Mr. Basanth Sabu &amp; Mrs. Jinu Shaju-ന്റെ പ്രിയ പുത്രൻ</li>
+            <li><a href="https://indiabookofrecords.in/ethan-abraham-basanth-ibr-achiever/" target="_blank" style="color:var(--gold);font-size:.82rem;">indiabookofrecords.in ↗</a></li>
+          </ul>
+        </div>
+        <span class="prog-tag">India Book of Records</span>
+      </div>
+    </div>
+
+    <div class="prog-item highlight">
+      <div class="prog-num">12</div>
       <div class="prog-body">
         <div class="prog-title">മെറിറ്റ് അവാർഡ് 🏆</div>
         <div class="prog-name">2 വിദ്യാർഥികൾ — ടാപ്പ് ചെയ്ത് വിശദാംശങ്ങൾ കാണൂ</div>
@@ -1625,11 +1642,12 @@ body::before{
               <div>
                 <div class="merit-ml">അബിയ മറിയം ഷാജി</div>
                 <div class="merit-en">Abiah Mariyam Shaji — CBSE 10th <span class="expand-icon" style="width:18px;height:18px;font-size:.65rem;">+</span></div>
+                <div style="font-size:.78rem;color:var(--leaf);font-weight:600;margin-top:2px;">🌟 ~97% — Highest in family &amp; school</div>
               </div>
             </div>
             <div class="prog-expand-body">
               <div class="merit-detail">
-                പഠിച്ചിരുന്ന പാമ്പാടി Cross Roads സ്കൂളിലെ ഏറ്റവും ഉയർന്ന മാർക്ക് നേടിയതും അബിയ ആണ്.
+                CBSE Class 10 Board Exam-ൽ ഏകദേശം 97% മാർക്കോടെ കുടുംബത്തിലും പഠിച്ചിരുന്ന പാമ്പാടി Cross Roads School-ലും ഏറ്റവും ഉയർന്ന മാർക്ക് നേടിയ അബിയ.
               </div>
               <div class="merit-family">
                 Mr. Shaji K. John &amp; Mrs. Jomy P. Thomas-ന്റെ പ്രിയ പുത്രി.<br>
@@ -1645,15 +1663,37 @@ body::before{
               <div>
                 <div class="merit-ml">ഓസ്റ്റിൻ കുരുവിള സുമോദ്</div>
                 <div class="merit-en">Austin Kuruvilla Sumod — 12th Merit <span class="expand-icon" style="width:18px;height:18px;font-size:.65rem;">+</span></div>
+                <div style="font-size:.78rem;color:var(--leaf);font-weight:600;margin-top:2px;">🌟 Highest in family — Class 12</div>
               </div>
             </div>
             <div class="prog-expand-body">
               <div class="merit-detail">
-                ഉന്നത വിജയം നേടിയ ഓസ്റ്റിൻ വടവാതൂർ കരിമ്പന്നൂർ.
+                Kerala Higher Secondary Board Exam (+2 / Class 12)-ൽ കുടുംബത്തിൽ ഏറ്റവും ഉയർന്ന മാർക്ക് നേടിയ ഓസ്റ്റിൻ.
               </div>
               <div class="merit-family">
                 Mr. Sumod Kuruvilla &amp; Mrs. Asha Jose Kunnathu-ന്റെ പ്രിയ പുത്രൻ.<br>
-                വടവാതൂർ കരിമ്പന്നൂർ, പരേതനായ ശ്രീ. K.S. കുരുവിള (കുഞ്ഞുമോൻ) അവർകളുടെ പ്രിയ കൊച്ചുമകൻ.
+                വടവാതൂർ കരിമ്പന്നൂർ, പരേതനായ ശ്രീ. K.S. കുരുവിള (കെ. എസ്. കുരുവിള) അവർകളുടെ പ്രിയ കൊച്ചുമകൻ.
+              </div>
+            </div>
+          </div>
+
+          <!-- Card C -->
+          <div class="merit-card expandable" onclick="toggle(this, event)">
+            <div class="merit-card-header">
+              <span class="merit-grade" style="background:var(--sage);">10th</span>
+              <div>
+                <div class="merit-ml">ഓസ്മിൻ എലിസബത്ത് സുമോദ്</div>
+                <div class="merit-en">Ausmin Elizabeth Sumod — Excellence Award <span class="expand-icon" style="width:18px;height:18px;font-size:.65rem;">+</span></div>
+              </div>
+            </div>
+            <div class="prog-expand-body">
+              <div class="merit-detail">
+                CBSE Class 10 Board Exam-ൽ മികച്ച ഗ്രേഡ് നേടിയതിന് Excellence Award / Consolation Prize.
+              </div>
+              <div class="merit-family">
+                Mr. Sumod Kuruvilla &amp; Mrs. Asha Jose Kunnathu-ന്റെ പ്രിയ പുത്രി.<br>
+                ഓസ്റ്റിൻ കുരുവിള സുമോദിന്റെ അനിയത്തി.<br>
+                വടവാതൂർ കരിമ്പന്നൂർ, പരേതനായ ശ്രീ. K.S. കുരുവിള അവർകളുടെ പ്രിയ കൊച്ചുമകൾ.
               </div>
             </div>
           </div>
@@ -1664,7 +1704,7 @@ body::before{
     </div>
 
     <div class="prog-item">
-      <div class="prog-num">12</div>
+      <div class="prog-num">13</div>
       <div class="prog-body">
         <div class="prog-title">നന്ദി പ്രകടനം</div>
         <div class="prog-name">ശ്രീ. E.J. രാജൻ, ഈരേച്ചേരിൽ<br>
@@ -1718,7 +1758,7 @@ body::before{
       <circle cx="6.5" cy="6.5" r="5" stroke="#888" stroke-width="1.5"/>
       <line x1="10.5" y1="10.5" x2="15" y2="15" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
-    <input class="search-in" type="text" id="branchSearch" placeholder="ശാഖ തിരയുക… (Karimpannoor, Ernakulam...)" oninput="filterBranches()">
+    <input class="search-in" type="text" id="branchSearch" placeholder="മേഖല തിരയുക… (Karimpannoor, Ernakulam...)" oninput="filterBranches()">
   </div>
   <div class="b-grid" id="branchesGrid"></div>
 </section>
@@ -1741,7 +1781,7 @@ body::before{
     </svg>
     <span>Our Roots</span>
   </div>
-  <div class="sec-title">ഒരൊറ്റ വേര്, അനേകം ശാഖകൾ</div>
+  <div class="sec-title">ഒരൊറ്റ വേര്, അനേകം ശാഖലകൾ</div>
 
   <div class="family-tree-card">
     <svg viewBox="0 0 340 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:290px;">
@@ -1759,11 +1799,11 @@ body::before{
   <path d="M169 266 Q175 258 169 248" stroke="#7a4a28" stroke-width="1.2" fill="none" opacity=".3"/>
   <path d="M172 252 Q166 242 171 232" stroke="#7a4a28" stroke-width="1.2" fill="none" opacity=".3"/>
 
-  <!-- CENTER main branch up → മണർകാട് ശാഖ -->
+  <!-- CENTER main branch up → മണർകാട് മേഖല -->
   <path d="M170 214 Q170 186 170 158" stroke="#3d7a52" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <!-- LEFT branch → തൃക്കോതമംഗലം ശാഖ -->
+  <!-- LEFT branch → തൃക്കോതമംഗലം മേഖല -->
   <path d="M170 214 Q136 196 100 182" stroke="#3d7a52" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <!-- RIGHT branch → തോട്ടപ്പുഴശ്ശേരി ശാഖ -->
+  <!-- RIGHT branch → തോട്ടപ്പുഴശ്ശേരി മേഖല -->
   <path d="M170 214 Q204 196 240 182" stroke="#3d7a52" stroke-width="6" fill="none" stroke-linecap="round"/>
 
   <!-- CENTER splits into കരിമ്പന്നൂർ (left) and ഈരേച്ചേരിൽ (right) -->
@@ -1812,15 +1852,15 @@ body::before{
   <!-- ഈരേച്ചേരിൽ - center right -->
   <rect x="178" y="76" width="84"  height="18" rx="9" fill="#173522" opacity=".9"/>
   <text x="220" y="88" font-size="7.5" fill="#d4aa5a" font-family="serif" text-anchor="middle" font-weight="bold">ഈരേച്ചേരിൽ</text>
-  <!-- മണർകാട് ശാഖ label at split point -->
+  <!-- മണർകാട് മേഖല label at split point -->
   <rect x="108" y="154" width="124" height="18" rx="9" fill="#2e5e3e" opacity=".92"/>
-  <text x="170" y="166" font-size="8"   fill="#d4aa5a" font-family="serif" text-anchor="middle" font-weight="bold">മണർകാട് ശാഖ</text>
+  <text x="170" y="166" font-size="8"   fill="#d4aa5a" font-family="serif" text-anchor="middle" font-weight="bold">മണർകാട് മേഖല</text>
   <!-- തൃക്കോതമംഗലം - left -->
   <rect x="18"  y="163" width="108" height="18" rx="9" fill="#173522" opacity=".9"/>
-  <text x="72"  y="175" font-size="7.5" fill="#d4aa5a" font-family="serif" text-anchor="middle" font-weight="bold">തൃക്കോതമംഗലം ശാഖ</text>
+  <text x="72"  y="175" font-size="7.5" fill="#d4aa5a" font-family="serif" text-anchor="middle" font-weight="bold">തൃക്കോതമംഗലം മേഖല</text>
   <!-- തോട്ടപ്പുഴശ്ശേരി - right -->
   <rect x="214" y="163" width="120" height="18" rx="9" fill="#173522" opacity=".9"/>
-  <text x="274" y="175" font-size="7.5" fill="#d4aa5a" font-family="serif" text-anchor="middle" font-weight="bold">തോട്ടപ്പുഴശ്ശേരി ശാഖ</text>
+  <text x="274" y="175" font-size="7.5" fill="#d4aa5a" font-family="serif" text-anchor="middle" font-weight="bold">തോട്ടപ്പുഴശ്ശേരി മേഖല</text>
 
   <!-- junction dots -->
   <circle cx="100" cy="182" r="5" fill="#c08a2e"/>
@@ -1858,15 +1898,15 @@ body::before{
       <div class="h-year-badge">1964</div>
       <div class="h-card">
         <h4>കുടുംബയോഗം സ്ഥാപനം</h4>
-        <p>കരിമ്പന്നൂർ മഹാകുടുംബയോഗ വാർഷികം ഔദ്യോഗികമായി 1964-ൽ സ്ഥാപിതമായി. കേരളത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ ചിതറിക്കിടക്കുന്ന കുടുംബ ശാഖകളെ ഒരുമിപ്പിക്കാനുള്ള ഉദ്ദേശ്യത്തോടെ ആരംഭിച്ചു.</p>
+        <p>കരിമ്പന്നൂർ മഹാകുടുംബയോഗ വാർഷികം ഔദ്യോഗികമായി 1964-ൽ സ്ഥാപിതമായി. കേരളത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ ചിതറിക്കിടക്കുന്ന കുടുംബ മേഖലകളെ ഒരുമിപ്പിക്കാനുള്ള ഉദ്ദേശ്യത്തോടെ ആരംഭിച്ചു.</p>
       </div>
     </div>
     <div class="h-entry">
       <div class="h-dot"></div>
       <div class="h-year-badge">1964 – 2025</div>
       <div class="h-card">
-        <h4>61 വർഷങ്ങൾ — ഒരൊറ്റ വൃക്ഷം, അനേകം ശാഖകൾ</h4>
-        <p>ഓരോ വർഷവും വാർഷിക സമ്മേളനം കുടുംബ ഐക്യം ഉറപ്പിക്കുന്നു. മണർകാട് ശാഖ, തൃക്കോതമംഗലം ശാഖ, തോട്ടപ്പുഴശ്ശേരി ശാഖ എന്നിങ്ങനെ ശാഖകൾ ഒരുമിച്ചു നിൽക്കുന്നു.</p>
+        <h4>61 വർഷങ്ങൾ — ഒരൊറ്റ വൃക്ഷം, അനേകം മേഖലകൾ</h4>
+        <p>ഓരോ വർഷവും വാർഷിക സമ്മേളനം കുടുംബ ഐക്യം ഉറപ്പിക്കുന്നു. മണർകാട് മേഖല, തൃക്കോതമംഗലം മേഖല, തോട്ടപ്പുഴശ്ശേരി മേഖല എന്നിങ്ങനെ മേഖലകൾ ഒരുമിച്ചു നിൽക്കുന്നു.</p>
       </div>
     </div>
     <div class="h-entry">
@@ -1911,9 +1951,9 @@ function setActive(el){
 }
 
 const branches=[
-  {name:'മണർകാട് ശാഖ',        eng:'Manarcad',            note:'കരിമ്പന്നൂർ · ഈരേച്ചേരിൽ', tags:['മാണി','ജോൺ','കുരുവിള']},
-  {name:'തൃക്കോതമംഗലം ശാഖ',   eng:'Thrikkothamangalam',  note:'Kottayam',                    tags:[]},
-  {name:'തോട്ടപ്പുഴശ്ശേരി ശാഖ', eng:'Thottappuzhasseri', note:'Kottayam',                    tags:[]},
+  {name:'മണർകാട് മേഖല',        eng:'Manarcad',            note:'കരിമ്പന്നൂർ · ഈരേച്ചേരിൽ', tags:['മാണി','ജോൺ','കുരുവിള']},
+  {name:'തൃക്കോതമംഗലം മേഖല',   eng:'Thrikkothamangalam',  note:'Kottayam',                    tags:[]},
+  {name:'തോട്ടപ്പുഴശ്ശേരി മേഖല', eng:'Thottappuzhasseri', note:'Kottayam',                    tags:[]},
 ];
 
 function render(list){
